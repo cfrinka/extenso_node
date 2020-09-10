@@ -19,12 +19,15 @@ function extenso(input) {
 
         console.log(hundreds[0])
 
-        /* let hundredPosition = n[1].charAt(0)
-        console.log(hundreds[hundredPosition]) */
+        
 
-    } if (n[1].charAt(0) == 1 && n[1].charAt(1) && n[1].charAt(2) > 0)
-
-        console.log(hundreds[1])
+    }else if (n[1].charAt(0) == 1 && n[1].charAt(1) && n[1].charAt(2) > 0){
+        
+        
+        let hundredPosition = n[1].charAt(0)
+        console.log(hundreds[hundredPosition])
+    
+}
 
     /* if (n[1].charAt(0) == 0 && n[1].charAt(1) > 0) {
 
@@ -44,5 +47,5 @@ function extenso(input) {
 };
 
 
-extenso(123456789)
+extenso(523456789)
 
