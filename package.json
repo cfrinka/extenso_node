@@ -1,0 +1,24 @@
+{
+  "name": "numero_extenso_node",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cfrinka/extenso_node.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cfrinka/extenso_node/issues"
+  },
+  "homepage": "https://github.com/cfrinka/extenso_node#readme",
+  "description": ""
+}
