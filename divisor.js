@@ -1,115 +1,124 @@
-const {
-    numbers: {
-        uptoNine,
-        tenToNineteen,
-        tens,
-        hundreds,
+const rs = require('readline-sync')
+
+const userStartingNumber = rs.questionFloat('Digite um valor: R$')
+
+
+
+function numberToWords() {
+    const {
+        numbers: {
+            uptoNine,
+            tenToNineteen,
+            tens,
+            hundreds,
+
+        }
+    } = require('./enumhelper');
+
+    const userNumberTreated = (userStartingNumber + '').replace('.', '')
+
+    n = ('000000000' + userNumberTreated).substr(-8).match(/^(\d{3})(\d{3})(\d{2})$/);
+
+
+
+
+    const userInputThousands = n[1]
+    const userInputReais = n[2]
+    const userInputCents = n[3]
+
+
+
+    function wordsReais(input) {
+
+        if (input == 000) {
+            return
+        }
+
+        const divisor = 100
+        const userHundreds = parseInt(input / divisor)
+        const remainder = input % divisor
+        const userTens = parseInt(remainder / 10)
+        const userUnits = remainder % 10
+        let result = ''
+
+        if (userTens == 1) {
+
+
+            result = `${hundreds[userHundreds]} e ${tenToNineteen[userUnits]} reais`
+            console.log(result)
+
+        } else {
+
+            result = `${hundreds[userHundreds]} e ${tens[userTens]} e ${uptoNine[userUnits]} reais`
+            console.log(result)
+        }
 
     }
-} = require('./enumhelper');
 
+    function extensoThousands(input) {
 
+        if (input == 000) {
+            return
+        }
 
-const numeroDoUsuario = 12563
-n = ('000000000' + numeroDoUsuario).substr(-8).match(/^(\d{3})(\d{3})(\d{2})$/);
+        const divisor = 100
+        const userHundreds = parseInt(input / divisor)
+        const remainder = input % divisor
+        const userTens = parseInt(remainder / 10)
+        const userUnits = remainder % 10
+        let result = ''
 
+        if (userHundreds == 0 && userTens == 0) {
+            result = `${uptoNine[userUnits]} mil`
+            console.log(result)
 
+        }
+        else if (userTens == 1) {
 
+            result = `${hundreds[userHundreds]} e ${tenToNineteen[userUnits]} mil`
+            console.log(result)
 
-const userInputMilhares = n[1]
-const userInputReais = n[2]
-const userInputCentavos = n[3]
+        } else {
 
+            result = `${hundreds[userHundreds]} e ${tens[userTens]} e ${uptoNine[userUnits]} mil`
+            console.log(result)
+        }
 
-
-function extensoReais(input) {
-
-    if (input == 000) {
-        return
     }
 
-    const divisor = 100
-    const centenas = parseInt(input / divisor)
-    const resto = input % divisor
-    const dezenas = parseInt(resto / 10)
-    const unidades = resto % 10
-    let resultado = ''
+    function extensoCents(input) {
+        const userTens = parseInt(input / 10)
+        const userUnits = userInputCents % 10
+        let result = ''
 
-    if (dezenas == 1) {
+        if (userTens == 1) {
 
+            result = `e ${tenToNineteen[userUnits]} centavos`
+            console.log(result)
 
-        resultado = `${hundreds[centenas]} e ${tenToNineteen[unidades]} reais`
-        console.log(resultado)
+        } if (userTens > 1) {
 
-    } else {
+            result = `e ${tens[userTens]} e ${uptoNine[userUnits]} centavos`
+            console.log(result)
+        } else {
+            result = `e ${uptoNine[userUnits]}`
+        }
 
-        resultado = `${hundreds[centenas]} e ${tens[dezenas]} e ${uptoNine[unidades]} reais`
-        console.log(resultado)
     }
+
+
+
+    extensoThousands(userInputThousands)
+    wordsReais(userInputReais)
+    extensoCents(userInputCents)
+
+
+
+
 
 }
 
-function extensoMilhares(input) {
-
-    if (input == 000) {
-        return
-    }
-
-    const divisor = 100
-    const centenas = parseInt(input / divisor)
-    const resto = input % divisor
-    const dezenas = parseInt(resto / 10)
-    const unidades = resto % 10
-    let resultado = ''
-
-    if (centenas == 0 && dezenas == 0) {
-        resultado = `${uptoNine[unidades]} mil`
-        console.log(resultado)
-
-    }
-    else if (dezenas == 1) {
-
-        resultado = `${hundreds[centenas]} e ${tenToNineteen[unidades]} mil`
-        console.log(resultado)
-
-    } else {
-
-        resultado = `${hundreds[centenas]} e ${tens[dezenas]} e ${uptoNine[unidades]} mil`
-        console.log(resultado)
-    }
-
-}
-
-function extensoCentavos(input) {
-    const divisor = 10
-    const dezenas = parseInt(input / 10)
-    const unidades = userInputCentavos % 10
-    let resultado = ''
-
-    if (dezenas == 1) {
-
-        resultado = `e ${tenToNineteen[unidades]} centavos`
-        console.log(resultado)
-
-    } if (dezenas > 1) {
-
-        resultado = `e ${tens[dezenas]} e ${uptoNine[unidades]} centavos`
-        console.log(resultado)
-    } else {
-        resultado = `e ${uptoNine[unidades]}`
-    }
-
-}
-
-extensoMilhares(userInputMilhares)
-extensoReais(userInputReais)
-extensoCentavos(userInputCentavos)
-
-
-
-
-
-
+numberToWords()
 
 
 
